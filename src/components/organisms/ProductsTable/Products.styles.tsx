@@ -2,8 +2,11 @@ import { CSSProperties } from "react";
 
 export const styles: Record<string, CSSProperties> = {
   tableContainer: {
+    display: "flex",
+    flexDirection: "column",
     backgroundColor: "white",
-    padding: "1rem",
+    padding: "2rem",
     borderRadius: "0.5rem",
+    gap: "1rem",
   },
 };

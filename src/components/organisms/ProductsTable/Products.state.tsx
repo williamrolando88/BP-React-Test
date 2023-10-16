@@ -4,6 +4,8 @@ import { BPProduct } from "../../../types/parsers/product";
 
 export const useProductsState = () => {
   const [products, setProducts] = useState<BPProduct[]>([]);
+  const [pageSize, setPageSize] = useState(5);
+  const [page, setPage] = useState(0);
 
   const fetchProducts = async () => {
     const { data, status } = await getProducts();
@@ -17,5 +19,18 @@ export const useProductsState = () => {
     fetchProducts();
   }, []);
 
-  return { products };
+  const productsList = () => {
+    const initialIndex = pageSize * page;
+    const lastIndex = initialIndex + pageSize;
+
+    return products.slice(initialIndex, lastIndex);
+  };
+
+  return {
+    products,
+    productsList: productsList(),
+    pageSize,
+    setPageSize,
+    setPage,
+  };
 };
