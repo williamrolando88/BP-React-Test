@@ -6,7 +6,7 @@ export const styles: Record<string, CSSProperties> = {
     paddingBottom: "1rem",
   },
   main: {
-    height: "100%",
+    flexGrow: 1,
     width: "100%",
     display: "flex",
     padding: "4rem 0",
