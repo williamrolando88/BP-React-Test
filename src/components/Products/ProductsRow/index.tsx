@@ -1,28 +1,22 @@
 import { FC } from "react";
 import { BPProduct } from "../../../types/parsers/product";
+import TableCell from "../TableHeader/TableCell";
+import { styles } from "./ProductsRow.styles";
 
 interface ProductsRowProps {
   product: BPProduct;
 }
+
 export const ProductsRow: FC<ProductsRowProps> = ({ product }) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        maxWidth: "60vw",
-        flexWrap: "nowrap",
-        overflow: "hidden",
-      }}
-    >
-      <img
-        style={{ height: "1rem", width: "auto" }}
-        src={product.logo}
-        alt={product.name}
-      />
-      <p>{product.name}</p>
-      <p>{product.description}</p>
-      <p>{product.date_release}</p>
-      <p>{product.date_revision}</p>
+    <div style={styles.row}>
+      <TableCell width="small" textAlign="center">
+        <img style={styles.logo} src={product.logo} alt={product.name} />
+      </TableCell>
+      <TableCell>{product.name}</TableCell>
+      <TableCell>{product.description}</TableCell>
+      <TableCell>{product.date_release}</TableCell>
+      <TableCell width="large">{product.date_revision}</TableCell>
     </div>
   );
 };
