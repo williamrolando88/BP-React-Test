@@ -1,4 +1,4 @@
-import { BPProduct } from "../src/types/serviceParsers";
+import { BPProduct } from "../src/types/parsers/product";
 
 export const _mockProductsArray: BPProduct[] = [
   {

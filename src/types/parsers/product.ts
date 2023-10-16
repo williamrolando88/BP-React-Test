@@ -5,8 +5,8 @@ export const BPProductParser = z.object({
   name: z.string(),
   description: z.string(),
   logo: z.string().url(),
-  date_release: z.string().datetime(),
-  date_revision: z.string().datetime(),
+  date_release: z.string().datetime({ offset: true }),
+  date_revision: z.string().datetime({ offset: true }),
 });
 export type BPProduct = z.infer<typeof BPProductParser>;
 
