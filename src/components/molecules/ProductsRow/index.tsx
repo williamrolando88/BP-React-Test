@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { BPProduct } from "../../../types/parsers/product";
-import TableCell from "../TableHeader/TableCell";
+import TableCell from "../../atoms/TableCell";
 import { styles } from "./ProductsRow.styles";
 
 interface ProductsRowProps {

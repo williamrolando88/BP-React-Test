@@ -1,5 +1,5 @@
 import { FC } from "react";
-import TableCell from "./TableCell";
+import TableCell from "../../atoms/TableCell";
 import { styles } from "./TableHeader.styles";
 
 export const TableHeader: FC = () => {

@@ -1,10 +1,10 @@
 import { FC } from "react";
+import { ProductsRow } from "../../molecules/ProductsRow";
+import { TableHeader } from "../../molecules/TableHeader";
 import { useProductsState } from "./Products.state";
 import { styles } from "./Products.styles";
-import { ProductsRow } from "./ProductsRow";
-import { TableHeader } from "./TableHeader";
 
-const Products: FC = () => {
+const ProductsTable: FC = () => {
   const { products } = useProductsState();
 
   return (
@@ -20,4 +20,4 @@ const Products: FC = () => {
   );
 };
 
-export default Products;
+export default ProductsTable;

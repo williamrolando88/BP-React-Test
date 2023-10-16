@@ -1,22 +1,22 @@
 import { useRoutes } from "react-router-dom";
-import AddProduct from "../components/AddProduct";
-import Products from "../components/Products";
-import Template from "../components/Template";
+import AddProductPage from "../components/templates/AddProductPage";
+import BaseLayout from "../components/templates/BaseLayout";
+import ProductIndexPage from "../components/templates/ProductIndexPage";
 import { paths } from "./paths";
 
 const Router = () =>
   useRoutes([
     {
-      element: <Template />,
+      element: <BaseLayout />,
       path: paths.root,
       children: [
         {
           index: true,
-          element: <Products />,
+          element: <ProductIndexPage />,
         },
         {
           path: paths.addProduct,
-          element: <AddProduct />,
+          element: <AddProductPage />,
         },
       ],
     },

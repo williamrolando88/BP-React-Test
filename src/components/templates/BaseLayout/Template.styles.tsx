@@ -1,10 +1,6 @@
 import { CSSProperties } from "react";
 
 export const styles: Record<string, CSSProperties> = {
-  bpLogo: {
-    height: "3rem",
-    width: "auto",
-  },
   header: {
     paddingTop: "1rem",
     paddingBottom: "1rem",

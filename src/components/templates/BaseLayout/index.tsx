@@ -1,13 +1,13 @@
 import { FC } from "react";
 import { Outlet } from "react-router-dom";
-import BPLogo from "../../assets/bp-logo.png";
+import BPLogo from "../../atoms/BPLogo";
 import { styles } from "./Template.styles";
 
-const Template: FC = () => {
+const BaseLayout: FC = () => {
   return (
     <>
       <header style={styles.header}>
-        <img style={styles.bpLogo} src={BPLogo} alt="Logo Banco Pichincha" />
+        <BPLogo />
       </header>
 
       <main style={styles.main}>
@@ -17,4 +17,4 @@ const Template: FC = () => {
   );
 };
 
-export default Template;
+export default BaseLayout;
