@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const API_AUTHOR_ID = "500";
+export const API_AUTHOR_ID = "200";
 
 export interface FetchResponseCS<T> {
   data: T | null;

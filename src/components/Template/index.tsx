@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Outlet } from "react-router-dom";
 import BPLogo from "../../assets/bp-logo.png";
-import { styles } from "./styles";
+import { styles } from "./Template.styles";
 
 const Template: FC = () => {
   return (

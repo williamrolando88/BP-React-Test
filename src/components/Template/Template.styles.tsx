@@ -11,8 +11,9 @@ export const styles: Record<string, CSSProperties> = {
   },
   main: {
     height: "100%",
-    width: "100vw",
+    width: "100%",
     display: "flex",
+    padding: "4rem 0",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
