@@ -7,6 +7,7 @@ const Template = () => {
       <header>
         <img src={BPLogo} alt="Logo Banco Pichincha" />
       </header>
+
       <main>
         <Outlet />
       </main>
