@@ -1,6 +1,7 @@
 export const baseUrl =
-  "https://tribu-ti-staffing-desarrollo-afangwbmcrhucqfh.z01.azurefd.net/ipf-msa-productosfinancieros/";
+  "https://tribu-ti-staffing-desarrollo-afangwbmcrhucqfh.z01.azurefd.net/ipf-msa-productosfinancieros/bp/products";
 
 export const apiRoutes = {
-  index: baseUrl + "bp/products",
+  index: baseUrl,
+  verification: baseUrl + "/verification",
 };
