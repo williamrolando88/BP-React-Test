@@ -1,15 +1,16 @@
+import { FC } from "react";
 import { Outlet } from "react-router-dom";
 import BPLogo from "../../assets/bp-logo.png";
-import "./styles.css";
+import { styles } from "./styles";
 
-const Template = () => {
+const Template: FC = () => {
   return (
     <>
-      <header>
-        <img className="bp-logo" src={BPLogo} alt="Logo Banco Pichincha" />
+      <header style={styles.header}>
+        <img style={styles.bpLogo} src={BPLogo} alt="Logo Banco Pichincha" />
       </header>
 
-      <main>
+      <main style={styles.main}>
         <Outlet />
       </main>
     </>
