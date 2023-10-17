@@ -1,8 +1,31 @@
-import { useCallback, useEffect, useState } from "react";
-import { getProducts } from "../../../services/product";
-import { BPProduct } from "../../../types/parsers/product";
+import {
+  FC,
+  ReactNode,
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { getProducts } from "../services/product";
+import { BPProduct } from "../types/parsers/product";
 
-export const useProductsState = () => {
+interface ContextProps {
+  children: ReactNode;
+}
+
+interface ContextValues {
+  productsLength: number;
+  productsList: BPProduct[];
+  pageSize: number;
+  setPageSize: (pageSize: number) => void;
+  handlePageBefore: VoidFunction;
+  handlePageNext: VoidFunction;
+}
+
+const ProductsContext = createContext<ContextValues>({} as ContextValues);
+
+export const ProductsContextProvider: FC<ContextProps> = ({ children }) => {
   const [products, setProducts] = useState<BPProduct[]>([]);
   const [pageSize, setPageSize] = useState(5);
   const [page, setPage] = useState(0);
@@ -36,12 +59,19 @@ export const useProductsState = () => {
     fetchProducts();
   }, []);
 
-  return {
-    products,
+  const contextValues: ContextValues = {
+    productsLength: products.length,
     productsList: productsList(),
     pageSize,
     setPageSize,
     handlePageBefore,
     handlePageNext,
   };
+  return (
+    <ProductsContext.Provider value={contextValues}>
+      {children}
+    </ProductsContext.Provider>
+  );
 };
+
+export const useProductsContext = () => useContext(ProductsContext);

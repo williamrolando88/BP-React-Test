@@ -1,15 +1,10 @@
 import { FC } from "react";
+import { useProductsContext } from "../../../hooks/useProducts";
 import { style } from "./TablePageSizeSelector.style";
 
-export interface TablePageSizeSelectorProps {
-  pageSize: number;
-  setPageSize: (pageSize: number) => void;
-}
+export const TablePageSizeSelector: FC = () => {
+  const { pageSize, setPageSize } = useProductsContext();
 
-export const TablePageSizeSelector: FC<TablePageSizeSelectorProps> = ({
-  pageSize,
-  setPageSize,
-}) => {
   return (
     <select
       style={style}

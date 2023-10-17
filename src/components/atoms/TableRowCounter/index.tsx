@@ -1,9 +1,8 @@
 import { FC } from "react";
-import { BPProduct } from "../../../types/parsers/product";
+import { useProductsContext } from "../../../hooks/useProducts";
 
-interface TableRowCounterProps {
-  products: BPProduct[];
-}
-export const TableRowCounter: FC<TableRowCounterProps> = ({ products }) => {
-  return <span>{`${products.length} Resultados`}</span>;
+export const TableRowCounter: FC = () => {
+  const { productsLength } = useProductsContext();
+
+  return <span>{`${productsLength} Resultados`}</span>;
 };

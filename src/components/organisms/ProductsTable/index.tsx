@@ -1,21 +1,14 @@
 import { FC } from "react";
+import { useProductsContext } from "../../../hooks/useProducts";
 import { TablePageSizeSelector } from "../../atoms/TablePageSizeSelector";
 import { TablePagination } from "../../atoms/TablePagination";
 import { TableRowCounter } from "../../atoms/TableRowCounter";
 import { ProductsRow } from "../../molecules/ProductsRow";
 import { TableHeader } from "../../molecules/TableHeader";
-import { useProductsState } from "./Products.state";
 import { styles } from "./Products.styles";
 
 const ProductsTable: FC = () => {
-  const {
-    products,
-    productsList,
-    pageSize,
-    setPageSize,
-    handlePageBefore,
-    handlePageNext,
-  } = useProductsState();
+  const { productsList } = useProductsContext();
 
   return (
     <div style={styles.tableContainer}>
@@ -28,12 +21,9 @@ const ProductsTable: FC = () => {
       </div>
 
       <div style={styles.footer}>
-        <TableRowCounter products={products} />
-        <TablePagination
-          onClickBefore={handlePageBefore}
-          onClickNext={handlePageNext}
-        />
-        <TablePageSizeSelector pageSize={pageSize} setPageSize={setPageSize} />
+        <TableRowCounter />
+        <TablePagination />
+        <TablePageSizeSelector />
       </div>
     </div>
   );

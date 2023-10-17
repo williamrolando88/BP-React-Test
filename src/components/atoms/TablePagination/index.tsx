@@ -1,33 +1,16 @@
-import { CSSProperties, FC } from "react";
+import { FC } from "react";
+import { useProductsContext } from "../../../hooks/useProducts";
+import { styles } from "./TablePagination.styles";
 
-interface TablePaginationProps {
-  onClickNext: VoidFunction;
-  onClickBefore: VoidFunction;
-}
+export const TablePagination: FC = () => {
+  const { handlePageBefore, handlePageNext } = useProductsContext();
 
-const styles: Record<string, CSSProperties> = {
-  container: {
-    display: "flex",
-    gap: "0.5rem",
-  },
-  button: {
-    border: "none",
-    backgroundColor: "transparent",
-    fontSize: "1rem",
-    cursor: "pointer",
-  },
-};
-
-export const TablePagination: FC<TablePaginationProps> = ({
-  onClickBefore,
-  onClickNext,
-}) => {
   return (
     <div style={styles.container}>
-      <button style={styles.button} onClick={onClickBefore}>
+      <button style={styles.button} onClick={handlePageBefore}>
         &lt; Atrás
       </button>
-      <button style={styles.button} onClick={onClickNext}>
+      <button style={styles.button} onClick={handlePageNext}>
         Siguiente &gt;
       </button>
     </div>
