@@ -11,5 +11,6 @@ export const getStyle = (
   fontWeight: "600",
   fontSize: "0.875rem",
   cursor: "pointer",
+  borderRadius: "0.25rem",
   ...injectedStyle,
 });
