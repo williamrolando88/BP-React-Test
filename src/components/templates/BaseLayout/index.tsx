@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Outlet } from "react-router-dom";
 import BPLogo from "../../atoms/BPLogo";
-import { styles } from "./Template.styles";
+import { styles } from "./BaseLayout.styles";
 
 const BaseLayout: FC = () => {
   return (
