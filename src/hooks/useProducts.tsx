@@ -18,6 +18,7 @@ interface ContextValues {
   productsLength: number;
   productsList: BPProduct[];
   pageSize: number;
+  page: number;
   setPageSize: (pageSize: number) => void;
   handlePageBefore: VoidFunction;
   handlePageNext: VoidFunction;
@@ -63,10 +64,12 @@ export const ProductsContextProvider: FC<ContextProps> = ({ children }) => {
     productsLength: products.length,
     productsList: productsList(),
     pageSize,
+    page,
     setPageSize,
     handlePageBefore,
     handlePageNext,
   };
+
   return (
     <ProductsContext.Provider value={contextValues}>
       {children}
