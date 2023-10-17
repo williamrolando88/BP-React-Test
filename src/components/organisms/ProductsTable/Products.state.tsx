@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getProducts } from "../../../services/product";
 import { BPProduct } from "../../../types/parsers/product";
 
@@ -15,19 +15,21 @@ export const useProductsState = () => {
     }
   };
 
-  const productsList = () => {
+  const productsList = useCallback(() => {
     const initialIndex = pageSize * page;
     const lastIndex = initialIndex + pageSize;
 
     return products.slice(initialIndex, lastIndex);
-  };
+  }, [page, pageSize, products]);
 
   const handlePageNext = () => {
-    setPage((prevState) => prevState + 1);
+    const maxPage = Math.floor(products.length / pageSize);
+
+    setPage((prevState) => (prevState + 1 < maxPage ? prevState + 1 : maxPage));
   };
 
   const handlePageBefore = () => {
-    setPage((prevState) => prevState - 1);
+    setPage((prevState) => (prevState - 1 >= 0 ? prevState - 1 : 0));
   };
 
   useEffect(() => {
