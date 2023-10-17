@@ -21,7 +21,7 @@ export async function serviceCaller<T extends z.ZodTypeAny>(
 
   const configuration: RequestInit = {
     ...config,
-    headers: { authorId: API_AUTHOR_ID },
+    headers: { authorId: API_AUTHOR_ID, "Content-Type": "application/json" },
   };
 
   let response;

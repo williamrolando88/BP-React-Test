@@ -1,26 +1,27 @@
 import { Mock, describe, expect, test, vi } from "vitest";
-import { _mockProductsArray } from "../../../__mock__/getProducts";
+import { _mockCreateProduct } from "../../../__mock__/getProducts";
 import { apiRoutes } from "../../../src/services/APIRoutes";
-import { getProducts } from "../../../src/services/product";
+import { createProduct } from "../../../src/services/product";
 import { API_AUTHOR_ID } from "../../../src/services/serviceCaller";
 
-describe("getProducts", () => {
-  test("should return products list", async () => {
+describe("createProduct", () => {
+  test("should return the created product", async () => {
     (global.fetch as Mock) = vi.fn(() =>
       Promise.resolve({
         status: 200,
-        json: async () => _mockProductsArray,
+        json: async () => _mockCreateProduct.expectedResponse,
       })
     );
 
-    const result = await getProducts();
+    const result = await createProduct(_mockCreateProduct.formData);
 
     expect(global.fetch).toBeCalledWith(apiRoutes.index, {
-      method: "GET",
+      method: "POST",
+      body: JSON.stringify(_mockCreateProduct.formData),
       headers: { authorId: API_AUTHOR_ID, "Content-Type": "application/json" },
     });
     expect(result.status).toBe(200);
     expect(result.error).toBeNull();
-    expect(result.data).toEqual(_mockProductsArray);
+    expect(result.data).toEqual(_mockCreateProduct.expectedResponse);
   });
 });

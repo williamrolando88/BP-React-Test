@@ -2,7 +2,7 @@ import { z } from "zod";
 import { apiRoutes } from "./APIRoutes";
 import { serviceCaller } from "./serviceCaller";
 
-export const validateId = (id: string) => {
+export const idExists = (id: string) => {
   const url = new URL(apiRoutes.verification);
   const params = url.searchParams;
 

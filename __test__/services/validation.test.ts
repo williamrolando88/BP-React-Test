@@ -1,7 +1,7 @@
 import { Mock, describe, expect, test, vi } from "vitest";
 import { apiRoutes } from "../../src/services/APIRoutes";
 import { API_AUTHOR_ID } from "../../src/services/serviceCaller";
-import { validateId } from "../../src/services/validation";
+import { idExists } from "../../src/services/validation";
 
 describe("validateId", () => {
   test.each([true, false])(
@@ -14,7 +14,7 @@ describe("validateId", () => {
         })
       );
 
-      const result = await validateId("some-id");
+      const result = await idExists("some-id");
 
       const url = new URL(apiRoutes.verification);
       const params = url.searchParams;
@@ -23,7 +23,10 @@ describe("validateId", () => {
 
       expect(global.fetch).toBeCalledWith(url, {
         method: "GET",
-        headers: { authorId: API_AUTHOR_ID },
+        headers: {
+          authorId: API_AUTHOR_ID,
+          "Content-Type": "application/json",
+        },
       });
       expect(result.status).toBe(200);
       expect(result.error).toBeNull();
