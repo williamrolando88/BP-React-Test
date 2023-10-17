@@ -26,6 +26,7 @@ interface ContextValues {
   handlePageNext: VoidFunction;
   searchText: string;
   setSearchText: (searchText: string) => void;
+  addProduct: (product: BPProduct) => void;
 }
 
 const ProductsContext = createContext<ContextValues>({} as ContextValues);
@@ -67,6 +68,10 @@ export const ProductsContextProvider: FC<ContextProps> = ({ children }) => {
     setPage((prevState) => (prevState - 1 >= 0 ? prevState - 1 : 0));
   };
 
+  const addProduct = (product: BPProduct) => {
+    setProducts((prevState) => [...prevState, product]);
+  };
+
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -86,6 +91,7 @@ export const ProductsContextProvider: FC<ContextProps> = ({ children }) => {
       handlePageNext,
       searchText,
       setSearchText,
+      addProduct,
     }),
     [
       filterProducts,

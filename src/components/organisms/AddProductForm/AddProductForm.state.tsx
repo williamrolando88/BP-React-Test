@@ -1,17 +1,22 @@
-import { useFormik } from "formik";
+import { FormikHelpers, useFormik } from "formik";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { toFormikValidationSchema } from "zod-formik-adapter";
 import { FORMIK_ERRORS as FE } from "../../../constants/errorString";
 import { addYearToDate, isTodayOrLater } from "../../../helpers/date";
 import { isIdAvailable } from "../../../helpers/isIdAvailable";
+import { useProductsContext } from "../../../hooks/useProducts";
+import { paths } from "../../../routes/paths";
+import { createProduct } from "../../../services/product";
 import { BPProduct } from "../../../types/parsers/product";
 
 export const validationSchema = z.object({
   id: z
     .string({ required_error: FE.REQUIRED })
     .min(3, FE.MIN_LENGTH(3))
-    .max(10, FE.MAX_LENGTH(10)),
+    .max(10, FE.MAX_LENGTH(10))
+    .refine(isIdAvailable, FE.UNIQUE_ID),
   name: z
     .string({ required_error: FE.REQUIRED })
     .min(5, FE.MIN_LENGTH(5))
@@ -24,7 +29,7 @@ export const validationSchema = z.object({
   date_release: z
     .string({ required_error: FE.REQUIRED })
     .refine(isTodayOrLater, FE.DATE),
-  date_revision: z.string({ required_error: FE.REQUIRED }).datetime(),
+  date_revision: z.string({ required_error: FE.REQUIRED }),
 });
 
 const initialValues: BPProduct = {
@@ -37,22 +42,40 @@ const initialValues: BPProduct = {
 };
 
 export const useAddProductForm = () => {
+  const navigate = useNavigate();
+  const { addProduct } = useProductsContext();
+
+  const onSubmit = async (
+    formValues: BPProduct,
+    actions: FormikHelpers<BPProduct>
+  ) => {
+    const { status, data } = await createProduct(formValues);
+
+    if (status === 200 && data) {
+      addProduct(data);
+      actions.resetForm();
+      navigate(paths.root);
+    }
+
+    actions.setSubmitting(false);
+  };
+
   const {
     values,
     touched,
     errors,
+    isSubmitting,
     handleChange,
     resetForm,
     handleSubmit,
     submitForm,
     setFieldValue,
-    setErrors,
   } = useFormik<BPProduct>({
     initialValues,
-    onSubmit: (formValues) => {
-      console.log("formValues", formValues);
-    },
+    onSubmit,
     validationSchema: toFormikValidationSchema(validationSchema),
+    validateOnChange: false,
+    validateOnBlur: true,
   });
 
   useEffect(() => {
@@ -61,20 +84,14 @@ export const useAddProductForm = () => {
     }
   }, [values.date_release, setFieldValue]);
 
-  const validateId = async () => {
-    if (values.id && !(await isIdAvailable(values.id))) {
-      setErrors({ id: FE.UNIQUE_ID });
-    }
-  };
-
   return {
     values,
     touched,
     errors,
+    isSubmitting,
     handleChange,
     resetForm,
     handleSubmit,
     submitForm,
-    validateId,
   };
 };

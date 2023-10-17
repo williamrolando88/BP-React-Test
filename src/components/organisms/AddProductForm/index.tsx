@@ -9,11 +9,11 @@ const AddProductForm: FC = () => {
     values,
     errors,
     touched,
+    isSubmitting,
     handleChange,
     handleSubmit,
     resetForm,
     submitForm,
-    validateId,
   } = useAddProductForm();
 
   return (
@@ -25,7 +25,6 @@ const AddProductForm: FC = () => {
           name="id"
           value={values.id}
           onChange={handleChange}
-          onBlur={validateId}
           errorText={touched.id ? errors.id : ""}
         />
 
@@ -80,10 +79,15 @@ const AddProductForm: FC = () => {
       </div>
 
       <div style={styles.buttonsContainer}>
-        <Button type="button" variant="secondary" onClick={() => resetForm()}>
+        <Button
+          type="button"
+          variant="secondary"
+          onClick={() => resetForm()}
+          disabled={isSubmitting}
+        >
           Reiniciar
         </Button>
-        <Button type="submit" onClick={submitForm}>
+        <Button type="submit" onClick={submitForm} disabled={isSubmitting}>
           Enviar
         </Button>
       </div>

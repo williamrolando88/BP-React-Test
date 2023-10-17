@@ -1,7 +1,7 @@
-import { validateId } from "../services/validation";
+import { idExists } from "../services/validation";
 
 export const isIdAvailable = async (id: string) => {
-  const { data } = await validateId(id);
+  const { data } = await idExists(id);
 
   return !data;
 };
