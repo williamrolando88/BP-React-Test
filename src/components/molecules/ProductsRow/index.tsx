@@ -16,10 +16,10 @@ export const ProductsRow: FC<ProductsRowProps> = ({ product }) => {
       <TableCell>{product.name}</TableCell>
       <TableCell>{product.description}</TableCell>
       <TableCell>
-        {new Date(product.date_release).toLocaleDateString("es-ES")}
+        {new Date(product.date_release).toLocaleDateString()}
       </TableCell>
       <TableCell width="large">
-        {new Date(product.date_revision).toLocaleDateString("es-ES")}
+        {new Date(product.date_revision).toLocaleDateString()}
       </TableCell>
     </div>
   );
