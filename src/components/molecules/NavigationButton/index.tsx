@@ -1,11 +1,11 @@
 import { FC, ReactNode } from "react";
 import { Link } from "react-router-dom";
-import Button from "../../atoms/Button";
+import Button, { ButtonProps } from "../../atoms/Button";
 
 interface NavigationButtonProps {
   children: ReactNode;
   to: string;
-  variant?: "primary" | "secondary";
+  variant?: ButtonProps["variant"];
 }
 
 const NavigationButton: FC<NavigationButtonProps> = ({
