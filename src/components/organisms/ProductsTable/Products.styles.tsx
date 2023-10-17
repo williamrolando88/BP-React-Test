@@ -9,4 +9,8 @@ export const styles: Record<string, CSSProperties> = {
     borderRadius: "0.5rem",
     gap: "1rem",
   },
+  footer: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
 };
