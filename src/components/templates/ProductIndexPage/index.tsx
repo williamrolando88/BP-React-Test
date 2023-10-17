@@ -1,12 +1,17 @@
 import { FC } from "react";
+import { paths } from "../../../routes/paths";
+import NavigationButton from "../../molecules/NavigationButton";
+import ProductSearchField from "../../molecules/ProductSearchField";
 import ProductsTable from "../../organisms/ProductsTable";
 import { style } from "./ProductIndexPage.style";
-import ProductSearchField from "../../molecules/ProductSearchField";
 
 const ProductIndexPage: FC = () => {
   return (
-    <div style={style}>
-      <ProductSearchField />
+    <div style={style.container}>
+      <div style={style.topbar}>
+        <ProductSearchField />
+        <NavigationButton to={paths.addProduct}>Agregar</NavigationButton>
+      </div>
       <ProductsTable />
     </div>
   );
