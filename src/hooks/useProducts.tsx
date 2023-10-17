@@ -80,6 +80,12 @@ export const ProductsContextProvider: FC<ContextProps> = ({ children }) => {
     setPage(0);
   }, [pageSize]);
 
+  useEffect(() => {
+    if (searchText) {
+      setPage(0);
+    }
+  }, [searchText]);
+
   const contextValues: ContextValues = useMemo(
     () => ({
       productsLength: filterProducts().length,
