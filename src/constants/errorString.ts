@@ -4,4 +4,5 @@ export const FORMIK_ERRORS = {
   MAX_LENGTH: (min: number) => `Requerido, máximo ${min} caracteres`,
   URL: "Requerido, debe ser una URL válida",
   DATE: "Requerido, la fecha debe ser igual o mayor a la fecha actual",
+  UNIQUE_ID: "ID no válido",
 };

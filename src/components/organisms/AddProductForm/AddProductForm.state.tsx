@@ -4,6 +4,7 @@ import { z } from "zod";
 import { toFormikValidationSchema } from "zod-formik-adapter";
 import { FORMIK_ERRORS as FE } from "../../../constants/errorString";
 import { addYearToDate, isTodayOrLater } from "../../../helpers/date";
+import { isIdAvailable } from "../../../helpers/isIdAvailable";
 import { BPProduct } from "../../../types/parsers/product";
 
 export const validationSchema = z.object({
@@ -23,7 +24,7 @@ export const validationSchema = z.object({
   date_release: z
     .string({ required_error: FE.REQUIRED })
     .refine(isTodayOrLater, FE.DATE),
-  date_revision: z.string().datetime({ offset: true }),
+  date_revision: z.string({ required_error: FE.REQUIRED }).datetime(),
 });
 
 const initialValues: BPProduct = {
@@ -45,6 +46,7 @@ export const useAddProductForm = () => {
     handleSubmit,
     submitForm,
     setFieldValue,
+    setErrors,
   } = useFormik<BPProduct>({
     initialValues,
     onSubmit: (formValues) => {
@@ -59,6 +61,12 @@ export const useAddProductForm = () => {
     }
   }, [values.date_release, setFieldValue]);
 
+  const validateId = async () => {
+    if (values.id && !(await isIdAvailable(values.id))) {
+      setErrors({ id: FE.UNIQUE_ID });
+    }
+  };
+
   return {
     values,
     touched,
@@ -67,5 +75,6 @@ export const useAddProductForm = () => {
     resetForm,
     handleSubmit,
     submitForm,
+    validateId,
   };
 };

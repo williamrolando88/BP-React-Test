@@ -13,6 +13,7 @@ const AddProductForm: FC = () => {
     handleSubmit,
     resetForm,
     submitForm,
+    validateId,
   } = useAddProductForm();
 
   return (
@@ -24,6 +25,7 @@ const AddProductForm: FC = () => {
           name="id"
           value={values.id}
           onChange={handleChange}
+          onBlur={validateId}
           errorText={touched.id ? errors.id : ""}
         />
 
