@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { _mockProductsArray } from "../../__mock__/getProducts";
+import { _mockProductsArray } from "../../__mock__/products";
 import { searchInArray } from "../../src/helpers/searchInArray";
 
 describe("searchInArray", () => {

@@ -1,5 +1,5 @@
 import { Mock, describe, expect, test, vi } from "vitest";
-import { _mockCreateProduct } from "../../../__mock__/getProducts";
+import { _mockCreateProduct } from "../../../__mock__/products";
 import { apiRoutes } from "../../../src/services/APIRoutes";
 import { createProduct } from "../../../src/services/product";
 import { API_AUTHOR_ID } from "../../../src/services/serviceCaller";
