@@ -58,7 +58,7 @@ const AddProductForm: FC = () => {
         <FormInputField
           label="Fecha de Liberación"
           type="date"
-          min={new Date().toLocaleDateString()}
+          min={new Date().toISOString()}
           style={styles.input}
           name="date_release"
           value={values.date_release}

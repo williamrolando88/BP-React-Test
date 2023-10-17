@@ -2,25 +2,27 @@ import { useFormik } from "formik";
 import { useEffect } from "react";
 import { z } from "zod";
 import { toFormikValidationSchema } from "zod-formik-adapter";
-import { FORMIK_ERRORS as fe } from "../../../constants/errorString";
-import { addYearToDate } from "../../../helpers/date";
+import { FORMIK_ERRORS as FE } from "../../../constants/errorString";
+import { addYearToDate, isTodayOrLater } from "../../../helpers/date";
 import { BPProduct } from "../../../types/parsers/product";
 
 export const validationSchema = z.object({
   id: z
-    .string({ required_error: fe.REQUIRED })
-    .min(3, fe.MIN_LENGTH(3))
-    .max(10, fe.MAX_LENGTH(10)),
+    .string({ required_error: FE.REQUIRED })
+    .min(3, FE.MIN_LENGTH(3))
+    .max(10, FE.MAX_LENGTH(10)),
   name: z
-    .string({ required_error: fe.REQUIRED })
-    .min(5, fe.MIN_LENGTH(5))
-    .max(100, fe.MAX_LENGTH(100)),
+    .string({ required_error: FE.REQUIRED })
+    .min(5, FE.MIN_LENGTH(5))
+    .max(100, FE.MAX_LENGTH(100)),
   description: z
-    .string({ required_error: fe.REQUIRED })
-    .min(10, fe.MIN_LENGTH(10))
-    .max(200, fe.MAX_LENGTH(200)),
-  logo: z.string({ required_error: fe.REQUIRED }).url(fe.URL),
-  date_release: z.string({ required_error: fe.REQUIRED }),
+    .string({ required_error: FE.REQUIRED })
+    .min(10, FE.MIN_LENGTH(10))
+    .max(200, FE.MAX_LENGTH(200)),
+  logo: z.string({ required_error: FE.REQUIRED }).url(FE.URL),
+  date_release: z
+    .string({ required_error: FE.REQUIRED })
+    .refine(isTodayOrLater, FE.DATE),
   date_revision: z.string().datetime({ offset: true }),
 });
 
